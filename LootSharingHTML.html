@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Goblin Loot Share</title>
+		<link rel="stylesheet" type="text/css" href="LootSharingStyle.css" />
+	</head>
+
+	<body>
+		<div id="container">
+			<div id="header">
+				<h1 id="title">Goblin Loot Share</h1>
+				<p>A handy webpage to help allocate all your hard earned loot.</p>
+				<hr />
+			</div>
+
+			<div id="content">
+				<div id="players">
+					<p>Party members partaking in loot
+					</p>
+					<form>
+						<textarea id="playerNames" rows="20" cols="91" style="max-height: 100px; min-height: 100px; resize: none" placeholder="Separate names by commas"></textarea>
+					</form>
+				</div>
+
+				<div id="loot">
+					<p>Hard earned loot
+					</p>
+					<form>
+						<textarea id="lootNames" rows="20" cols="92" style="max-height: 100px; min-height: 100px; resize: none" placeholder="Separate items by commas"></textarea>
+					</form>
+				</div>
+			</div>
+
+			<div class="splitHolder" style="vertical-align: bottom">
+				<button id="split" type="button">Split!</button>
+			</div>
+
+			<hr />
+
+			<div id="results">
+				<h4>Current split:</h4>
+					<div id="currentSplit">
+					</div>
+			</div>
+
+			<div id="history">
+				<h4>History:</h4>
+			</div>
+		</div>
+	</body>
+	
+	<footer>
+		<script src="LootSharingJS.js"></script>
+	</footer>
+</html>
