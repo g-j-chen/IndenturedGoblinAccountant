@@ -435,15 +435,16 @@ function assignLootToPlayers() {
 function showAllSplits(prevTally) {
 	var splits = document.getElementById("splits");
 	splits.innerHTML = "";
+	var netWorthDict = {};
 	for (var i = prevTally.length - 1; i >= 0; i--) {
-		formatSingleSplit(prevTally[i]);
+		netWorthDict = formatSingleSplit(prevTally[i], netWorthDict);
 		let theFirstChild = splits.firstChild;
 		splits.insertBefore(document.createElement("br"), theFirstChild);
 	}
 }
 
 
-function formatSingleSplit(splitArr) {
+function formatSingleSplit(splitArr, netWorthDict) {
 	//create div to hold and display all player's loot, formatted
 	var currentSplit = document.createElement("div");
 	currentSplit.style.border = "thick solid #C6CED2";
@@ -452,7 +453,19 @@ function formatSingleSplit(splitArr) {
 	currentSplit.style.overflow = "hidden";
 	currentSplit.style.width = "70%";
 	currentSplit.style.margin = "auto";
-	//document.getElementById("splits").appendChild(currentSplit);
+	currentSplit.style.position = "relative";
+
+	//create and format button to delete currentSplit
+	var delCurrentSplitButton = document.createElement("button");
+	delCurrentSplitButton.appendChild(document.createTextNode("x"));
+	currentSplit.appendChild(delCurrentSplitButton);
+	delCurrentSplitButton.style.position = "absolute";
+	delCurrentSplitButton.style.top = "5px";
+	delCurrentSplitButton.style.right = "5px";
+	delCurrentSplitButton.style.cursor = "pointer";
+	delCurrentSplitButton.style.borderRadius = "50%";
+	
+	//inserting currentSplit on top of others
 	var splits = document.getElementById("splits");
 	let theFirstChild = splits.firstChild;
 	splits.insertBefore(currentSplit, theFirstChild);
@@ -463,10 +476,9 @@ function formatSingleSplit(splitArr) {
 
 		//create div to wrap everything in, formatted
 		var playerDiv = document.createElement("div");
-		playerDiv.style.marginTop = "10px";
+		playerDiv.style.marginTop = "20px";
 		playerDiv.style.width = "auto";
 		playerDiv.style.overflow = "hidden";
-		//playerDiv.style.border = "thin solid #B3B3FF"
 		playerDiv.style.borderRadius = "10px";
 		currentSplit.appendChild(playerDiv);
 		//playerDiv.style.backgroundColor = "#FFFF66"; //use when need to see where div is...
@@ -494,16 +506,23 @@ function formatSingleSplit(splitArr) {
 		nameEl.appendChild(document.createTextNode(playerName));
 		//adding name element
 		playerNameNetWorthDiv.appendChild(nameEl);
+		
 		//creating and adding div under name element to hold net worth
-		playerNameNetWorthDiv.appendChild(document.createTextNode("Amount in gp: " + getNetWorth(lootArr)));
+		var currentSplitWorth = getNetWorth(lootArr);
+		if (playerName in netWorthDict) {
+			currentSplitWorth += netWorthDict[playerName];
+		}
+		netWorthDict[playerName] = currentSplitWorth;
+		playerNameNetWorthDiv.appendChild(document.createTextNode("Net worth: " + currentSplitWorth + "gp"));
 
 		//create div to show loot as an <ul>
 		var lootDiv = document.createElement("div");
 		var lootDivList = document.createElement("ul");
 		lootDivList.style.marginTop = "0";
 		lootDivList.style.marginBottom = "0";
-		lootDiv.style.cssFloat = "right";
-		lootDiv.style.width = "70%";
+		//lootDiv.style.cssFloat = "right";
+		lootDiv.style.width = "80%";
+		lootDiv.style.marginRight = "20px";
 		lootDiv.appendChild(lootDivList);
 		playerDiv.appendChild(lootDiv);
 		//lootDiv.style.backgroundColor = "#99FF99"; //use when need to see where div is	
@@ -520,11 +539,24 @@ function formatSingleSplit(splitArr) {
 					lootItemString += " x" + lootArr[j].amount;
 				}
 				var li = document.createElement("li");
+				li.style.position = "relative";
+				var delLootItemButton = document.createElement("button");
+				delLootItemButton.innerHTML = "x";
+				delLootItemButton.style.position = "absolute";
+				delLootItemButton.style.top = "0";
+				delLootItemButton.style.right = "0";
+				delLootItemButton.style.backgroundColor = "#C6CED2";
+				delLootItemButton.style.cursor = "pointer";
+				delLootItemButton.style.borderRadius = "50%";
 				li.appendChild(document.createTextNode(lootItemString));
+				var liDiv = document.createElement("div");
+				liDiv.appendChild(delLootItemButton);
+				li.appendChild(liDiv);
 				lootDivList.appendChild(li);
 			}
 		}
 	}
+	return netWorthDict;
 }
 
 
