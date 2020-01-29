@@ -41,14 +41,11 @@ h1, h3 {
 	padding-left: 10px;
 }
 
-#results, #history {
+#splits {
 	clear: both;
-	padding: 10px 10px 10px 30px;
-	height: auto;
-}
-
-#currentSplit, #history {
-	width: 1000px;
+	width: inherit;
+	min-height: 525px;
+	align-items: center;
 }
 
 #playerNames, #lootNames {

@@ -1,0 +1,75 @@
+{tally:[[{"player_name":"Cinza","loot":[{"name":"gems 100gp","value":100,"amount":1},{"name":"gold ring with black flying snake symbol 25gp","value":25,"amount":1},{"name":"12gp","value":12,"amount":1},{"name":"11sp","value":1.1,"amount":1},{"name":"12cp","value":0.12,"amount":1}]},{"player_name":"Fin","loot":[{"name":"gems 100gp","value":100,"amount":1},{"name":"holy symbol of sylvanus 25gp","value":25,"amount":1},{"name":"11gp","value":11,"amount":1},{"name":"20sp","value":2,"amount":1},{"name":"21cp","value":0.21,"amount":1}]},{"player_name":"Mir","loot":[{"name":"gems 100gp","value":100,"amount":1},{"name":"2pp","value":20,"amount":1},{"name":"16gp","value":16,"amount":1},{"name":"20sp","value":2,"amount":1},{"name":"21cp","value":0.21,"amount":1}]},{"player_name":"Niman","loot":[{"name":"gems 100gp","value":100,"amount":1},{"name":"silver salt and pepper shakers set 25gp","value":25,"amount":1},{"name":"12gp","value":12,"amount":1},{"name":"10sp","value":1,"amount":1},{"name":"21cp","value":0.21,"amount":1}]},{"player_name":"Snake Catcher","loot":[{"name":"gems 100gp","value":100,"amount":1},{"name":"2pp","value":20,"amount":1},{"name":"17gp","value":17,"amount":1},{"name":"11sp","value":1.1,"amount":1},{"name":"12cp","value":0.12,"amount":1}]}],[{"player_name":"Cinza","loot":[{"name": "10gp","value":10,"amount":1},{"name":"20sp","value":2,"amount":1},{"name":"50cp","value":0.5,"amount":1}]},{"player_name":"Fin","loot":[{"name": "10gp","value":10,"amount":1},{"name":"20sp","value":2,"amount":1},{"name":"50cp","value":0.5,"amount":1}]},{"player_name":"Mir","loot":[{"name": "10gp","value":10,"amount":1},{"name":"20sp","value":2,"amount":1},{"name":"50cp","value":0.5,"amount":1}]},{"player_name":"Niman","loot":[{"name": "10gp","value":10,"amount":1},{"name":"20sp","value":2,"amount":1},{"name":"50cp","value":0.5,"amount":1}]},{"player_name":"Snake Catcher","loot":[{"name": "10gp","value":10,"amount":1},{"name":"20sp","value":2,"amount":1},{"name":"50cp","value":0.5,"amount":1}]}]], length: 1}
+
+
+
+
+More readable format:
+
+{tally:
+[
+	//Split 1 (most recent):
+	[
+		{"player_name":Cinza",
+			"loot":[{"name":"gems 100gp","value":100,"amount":1},
+		   	{"name":"gold ring with black flying snake symbol 25gp","value":25,"amount":1},
+		   	{"name":"12gp","value":12,"amount":1},
+		   	{"name":"11sp","value":1.1,"amount":1},
+		   	{"name":"12cp","value":0.12,"amount":1}]},
+
+		{"player_name":"Fin",
+			"loot":[{"name":"gems 100gp","value":100,"amount":1},
+			{"name":"holy symbol of sylvanus 25gp","value":25,"amount":1},
+			{"name":"11gp","value":11,"amount":1},
+			{"name":"20sp","value":2,"amount":1},
+			{"name":"21cp","value":0.21,"amount":1}]},
+
+		{"player_name":"Mir",
+			"loot":[{"name":"gems 100gp","value":100,"amount":1},
+			{"name":"2pp","value":20,"amount":1},
+			{"name":"16gp","value":16,"amount":1},
+			{"name":"20sp","value":2,"amount":1},
+			{"name":"21cp","value":0.21,"amount":1}]},
+
+		{"player_name":"Niman",
+			"loot":[{"name":"gems 100gp","value":100,"amount":1},
+			{"name":"silver salt and pepper shakers set 25gp","value":25,"amount":1},
+			{"name":"12gp","value":12,"amount":1},
+			{"name":"10sp","value":1,"amount":1},
+			{"name":"21cp","value":0.21,"amount":1}]},
+
+		{"player_name":"Snake Catcher",
+			"loot":[{"name":"gems 100gp","value":100,"amount":1},
+			{"name":"2pp","value":20,"amount":1},
+			{"name":"17gp","value":17,"amount":1},
+			{"name":"11sp","value":1.1,"amount":1},
+			{"name":"12cp","value":0.12,"amount":1}]}
+	],
+
+	//Split 2 (one before Split 1):
+	[
+		{"player_name":"Cinza",
+			"loot":[{"name": "10gp","value":10,"amount":1},
+			{"name":"20sp","value":2,"amount":1},
+			{"name":"50cp","value":0.5,"amount":1}]},
+		
+		{"player_name":"Fin",
+			"loot":[{"name": "10gp","value":10,"amount":1},
+			{"name":"20sp","value":2,"amount":1},
+			{"name":"50cp","value":0.5,"amount":1}]},
+		
+		{"player_name":"Mir",
+			"loot":[{"name": "10gp","value":10,"amount":1},
+			{"name":"20sp","value":2,"amount":1},
+			{"name":"50cp","value":0.5,"amount":1}]},
+		
+		{"player_name":"Niman",
+			"loot":[{"name": "10gp","value":10,"amount":1},
+			{"name":"20sp","value":2,"amount":1},
+			{"name":"50cp","value":0.5,"amount":1}]},
+		
+		{"player_name":"Snake Catcher",
+			"loot":[{"name": "10gp","value":10,"amount":1},
+			{"name":"20sp","value":2,"amount":1},
+			{"name":"50cp","value":0.5,"amount":1}]},
+	]
+], length: 1}
