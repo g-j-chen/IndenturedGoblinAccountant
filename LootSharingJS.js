@@ -17,7 +17,7 @@ document.getElementById("split").onclick = function() {
 window.onload = function() {
 	var prevTally = JSON.parse(localStorage.getItem("tally"));
 
-	if (prevTally !== null) {
+	if (prevTally !== null && prevTally.length > 0) {
 		showAllSplits(prevTally);
 
 		var mostRecentTally = prevTally[0];
@@ -434,17 +434,30 @@ function assignLootToPlayers() {
 
 function showAllSplits(prevTally) {
 	var splits = document.getElementById("splits");
+	splits.style.position = "relative";
 	splits.innerHTML = "";
 	var netWorthDict = {};
 	for (var i = prevTally.length - 1; i >= 0; i--) {
-		netWorthDict = formatSingleSplit(prevTally[i], netWorthDict);
+		netWorthDict = formatSingleSplit(prevTally, i, netWorthDict);
 		let theFirstChild = splits.firstChild;
 		splits.insertBefore(document.createElement("br"), theFirstChild);
 	}
+
+	var delAllButton = document.createElement("button");
+	delAllButton.appendChild(document.createTextNode("Clear All"));
+	delAllButton.style.cursor = "pointer";
+	delAllButton.style.position = "absolute";
+	delAllButton.style.right = "20px";
+	delAllButton.style.bottom = "20px";
+	delAllButton.onclick = function() {
+		localStorage.clear();
+		window.location.reload();
+	}
+	splits.appendChild(delAllButton);
 }
 
 
-function formatSingleSplit(splitArr, netWorthDict) {
+function formatSingleSplit(prevTally, k, netWorthDict) {
 	//create div to hold and display all player's loot, formatted
 	var currentSplit = document.createElement("div");
 	currentSplit.style.border = "thick solid #C6CED2";
@@ -458,17 +471,24 @@ function formatSingleSplit(splitArr, netWorthDict) {
 	//create and format button to delete currentSplit
 	var delCurrentSplitButton = document.createElement("button");
 	delCurrentSplitButton.appendChild(document.createTextNode("x"));
-	currentSplit.appendChild(delCurrentSplitButton);
 	delCurrentSplitButton.style.position = "absolute";
 	delCurrentSplitButton.style.top = "5px";
 	delCurrentSplitButton.style.right = "5px";
 	delCurrentSplitButton.style.cursor = "pointer";
 	delCurrentSplitButton.style.borderRadius = "50%";
+	delCurrentSplitButton.onclick = function() {
+		prevTally.splice(k, 1);
+		localStorage.setItem("tally", JSON.stringify(prevTally));
+		showAllSplits(prevTally);
+	}
+	currentSplit.appendChild(delCurrentSplitButton);
 	
 	//inserting currentSplit on top of others
 	var splits = document.getElementById("splits");
 	let theFirstChild = splits.firstChild;
 	splits.insertBefore(currentSplit, theFirstChild);
+
+	var splitArr = prevTally[k];
 	
 	for (var i = 0; i < splitArr.length; i++) {
 		var playerName = splitArr[i].player_name;
@@ -520,8 +540,8 @@ function formatSingleSplit(splitArr, netWorthDict) {
 		var lootDivList = document.createElement("ul");
 		lootDivList.style.marginTop = "0";
 		lootDivList.style.marginBottom = "0";
-		//lootDiv.style.cssFloat = "right";
-		lootDiv.style.width = "80%";
+		lootDiv.style.display = "inline-block";
+		lootDiv.style.width = "60%";
 		lootDiv.style.marginRight = "20px";
 		lootDiv.appendChild(lootDivList);
 		playerDiv.appendChild(lootDiv);
@@ -548,6 +568,7 @@ function formatSingleSplit(splitArr, netWorthDict) {
 				delLootItemButton.style.backgroundColor = "#C6CED2";
 				delLootItemButton.style.cursor = "pointer";
 				delLootItemButton.style.borderRadius = "50%";
+				delLootItemButton.onclick = () => deleteLootItem(prevTally, k, i, j);
 				li.appendChild(document.createTextNode(lootItemString));
 				var liDiv = document.createElement("div");
 				liDiv.appendChild(delLootItemButton);
@@ -566,4 +587,21 @@ function getNetWorth(lootArr) {
 		netWorth += lootArr[i].value;
 	}
 	return netWorth;
+}
+
+
+function deleteLootItem(prevTally, k, playerIndex, lootIndex) {
+	var splitArr = prevTally[k];
+	console.log(splitArr);
+	for (var i = 0; i < splitArr.length; i++) {
+		if (i === playerIndex) {
+			var lootArr = splitArr[i].loot;
+			console.log(typeof(lootArr));
+			lootArr.splice(lootIndex, 1);
+			splitArr[i].loot = lootArr;
+		}
+	}
+	prevTally[k] = splitArr;
+	localStorage.setItem("tally", JSON.stringify(prevTally));
+	showAllSplits(prevTally);
 }

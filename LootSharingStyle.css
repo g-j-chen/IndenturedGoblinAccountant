@@ -46,6 +46,7 @@ h1, h3 {
 	width: inherit;
 	min-height: 525px;
 	align-items: center;
+	padding-bottom: 20px;
 }
 
 #playerNames, #lootNames {
