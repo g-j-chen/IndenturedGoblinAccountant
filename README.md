@@ -18,7 +18,7 @@ Enter **comma separated** items of loot in the "Hard earned loot" box.
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eg. `15gp`
  * Items should have a format of name then value:
 
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eg. `gold ring 25gp`
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eg. `gold ring 25gp, wooden rocking horse with silver inlay and quartz eyes 25gp`
 
 ### Built using:
   * JavaScript
