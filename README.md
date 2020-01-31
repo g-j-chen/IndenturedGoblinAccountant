@@ -4,6 +4,7 @@ Indentured goblins helping you to split your hard earned loot equally between al
 
 ### Usage
 Navigate to [here](https://g-j-chen.github.io/IndenturedGoblinAccountant/).
+
 Enter **comma separated** names of players in the "Adventurers" box.
 
 &nbsp;&nbsp;&nbsp;&nbsp;eg. `Acererak, Bigby, Conan`
