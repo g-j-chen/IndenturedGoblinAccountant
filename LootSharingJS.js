@@ -568,7 +568,8 @@ function formatSingleSplit(prevTally, k, netWorthDict) {
 				delLootItemButton.style.backgroundColor = "#C6CED2";
 				delLootItemButton.style.cursor = "pointer";
 				delLootItemButton.style.borderRadius = "50%";
-				delLootItemButton.onclick = () => deleteLootItem(prevTally, k, i, j);
+				delLootItemButton.id = i + " " + j;
+				delLootItemButton.onclick = () => deleteLootItem(prevTally, k);
 				li.appendChild(document.createTextNode(lootItemString));
 				var liDiv = document.createElement("div");
 				liDiv.appendChild(delLootItemButton);
@@ -586,21 +587,18 @@ function getNetWorth(lootArr) {
 	for (var i = 0; i < lootArr.length; i++) {
 		netWorth += lootArr[i].value;
 	}
-	return netWorth;
+	return parseFloat(netWorth.toFixed(2));
 }
 
 
-function deleteLootItem(prevTally, k, playerIndex, lootIndex) {
+function deleteLootItem(prevTally, k) {
+	var buttonID = (event.target.id).split(" ");
+	var playerIndex = parseInt(buttonID[0]);
+	var lootIndex = parseInt(buttonID[1]);
 	var splitArr = prevTally[k];
-	console.log(splitArr);
-	for (var i = 0; i < splitArr.length; i++) {
-		if (i === playerIndex) {
-			var lootArr = splitArr[i].loot;
-			console.log(typeof(lootArr));
-			lootArr.splice(lootIndex, 1);
-			splitArr[i].loot = lootArr;
-		}
-	}
+	var lootArr = splitArr[playerIndex].loot;
+	lootArr.splice(lootIndex, 1);
+	splitArr[playerIndex].loot = lootArr;
 	prevTally[k] = splitArr;
 	localStorage.setItem("tally", JSON.stringify(prevTally));
 	showAllSplits(prevTally);
